@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using coreTest2Api.Models;
 
 namespace coreTest2Api.Models
 {
@@ -399,6 +400,8 @@ namespace coreTest2Api.Models
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+
+        public DbSet<coreTest2Api.Models.Utilisateurs> Utilisateurs { get; set; }
         //public object checkemail(string email)
         //{
         //    var obj=new object();
