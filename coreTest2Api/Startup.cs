@@ -32,7 +32,7 @@ namespace coreTest2Api
         public void ConfigureServices(IServiceCollection services)
         {
             //Injection jwt 
-            services.Configure<_AppExtraSettings>(Configuration.GetSection("_AppExtraSettings"));
+            //services.Configure<_AppExtraSettings>(Configuration.GetSection("_AppExtraSettings"));
 
             services.AddControllers();
             services.AddDbContext<coreTest2Api.Models.Pfa_evContext>(options =>
@@ -42,31 +42,28 @@ namespace coreTest2Api
                 {
                     builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
                 });
-                options.AddPolicy("AllowOrigin",
-                    builder => builder.WithOrigins("http://localhost:4200")
-                              .WithMethods("GET"));
-            });
+        });
 
-            var key =Encoding.UTF8.GetBytes(Configuration["_AppExtraSettings:JWT_Key"].ToString());
+            //var key =Encoding.UTF8.GetBytes(Configuration["_AppExtraSettings:JWT_Key"].ToString());
 
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x => {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = false;
-                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(key),
-                    ValidateIssuer = false,
-                    ValidateAudience = false,
-                    ClockSkew=TimeSpan.Zero
+            //services.AddAuthentication(x =>
+            //{
+            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(x => {
+            //    x.RequireHttpsMetadata = false;
+            //    x.SaveToken = false;
+            //    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+            //    {
+            //        ValidateIssuerSigningKey = true,
+            //        IssuerSigningKey = new SymmetricSecurityKey(key),
+            //        ValidateIssuer = false,
+            //        ValidateAudience = false,
+            //        ClockSkew=TimeSpan.Zero
 
-                };
-            });
+            //    };
+            //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -81,14 +78,12 @@ namespace coreTest2Api
 
             app.UseRouting();
 
+            //app.UseAuthentication();
 
-            app.UseAuthentication();
-
-            app.UseAuthorization();
+            app.UseAuthorization();            
 
             app.UseCors("CorsEnabling");
-            app.UseCors("AllowOrigin");
-
+                       
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -22,40 +22,44 @@ namespace coreTest2Api.Controllers
     public class AdministrateursController : ControllerBase
     {
         private readonly Pfa_evContext _context;
-        private readonly _AppExtraSettings _AppExtra;
-        public AdministrateursController(Pfa_evContext context,IOptions<_AppExtraSettings> AppExtra)
+        //private readonly _AppExtraSettings _AppExtra;
+        //public AdministrateursController(Pfa_evContext context, IOptions<_AppExtraSettings> AppExtra)
+        //{
+        //    _context = context;
+        //    _AppExtra = AppExtra.Value;
+        //}
+        public AdministrateursController(Pfa_evContext context)
         {
             _context = context;
-            _AppExtra = AppExtra.Value;
         }
-        // GET: api/Administrateurs/Login
-        [HttpPost]
-        [Route("Login")]
-        public async Task<ActionResult> Login(Administrateur admin)
-        {
-            //var user = await _context.Administrateur.FindAsync(admin.Id);
-            var user = _context.Administrateur.FromSqlInterpolated($"SELECT * FROM dbo.Administrateur").Where(res => res.Email == admin.Email).FirstOrDefault();
-            if (user != null && user.MotdePasse == admin.MotdePasse)
-            {
-                var tokenDescriptor = new SecurityTokenDescriptor
-                {
-                    Subject = new ClaimsIdentity(new Claim[]
-                    {
-                        new Claim("UserId", user.Id)
-                    }),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_AppExtra.JWT_Key)), SecurityAlgorithms.HmacSha256Signature),
-                };
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                var token = tokenHandler.WriteToken(securityToken);
-                return Ok(new { token });
-            }
-            else
-            {
-                return BadRequest(new { message = "Email ou Mot de passe est incorrect" });
-            }
-        }
+        //// GET: api/Administrateurs/Login
+        //[HttpPost]
+        //[Route("Login")]
+        //public async Task<ActionResult> Login(Administrateur admin)
+        //{
+        //    //var user = await _context.Administrateur.FindAsync(admin.Id);
+        //    var user = _context.Administrateur.FromSqlInterpolated($"SELECT * FROM dbo.Administrateur").Where(res => res.Email == admin.Email).FirstOrDefault();
+        //    if (user != null && user.MotdePasse == admin.MotdePasse)
+        //    {
+        //        var tokenDescriptor = new SecurityTokenDescriptor
+        //        {
+        //            Subject = new ClaimsIdentity(new Claim[]
+        //            {
+        //                new Claim("UserId", user.Id)
+        //            }),
+        //            Expires = DateTime.UtcNow.AddDays(1),
+        //            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_AppExtra.JWT_Key)), SecurityAlgorithms.HmacSha256Signature),
+        //        };
+        //        var tokenHandler = new JwtSecurityTokenHandler();
+        //        var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+        //        var token = tokenHandler.WriteToken(securityToken);
+        //        return Ok(new { token });
+        //    }
+        //    else
+        //    {
+        //        return BadRequest(new { message = "Email ou Mot de passe est incorrect" });
+        //    }
+        //}
 
         // GET: api/Administrateurs
         [HttpGet]

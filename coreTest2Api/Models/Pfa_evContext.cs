@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -373,7 +374,27 @@ namespace coreTest2Api.Models
                     .HasForeignKey(d => d.IdHoraire)
                     .HasConstraintName("FK__Seance__Id_Horai__29572725");
             });
-
+            modelBuilder.Entity<Utilisateurs>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+                entity.Property(e => e.Nom)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+                entity.Property(e => e.Prenom)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+                entity.Property(e => e.Email)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+                entity.Property(e => e.MotdePasse)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+                entity.Property(e => e._Status)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+            });
             OnModelCreatingPartial(modelBuilder);
         }
 
@@ -398,5 +419,6 @@ namespace coreTest2Api.Models
         //    }
         //    return obj;
         //}
+
     }
 }

@@ -150,4 +150,3 @@ C:\Users\MICRO\source\repos\coreTest2Api\coreTest2Api\obj\Debug\netcoreapp3.1\st
 C:\Users\MICRO\source\repos\coreTest2Api\coreTest2Api\obj\Debug\netcoreapp3.1\coreTest2Api.dll
 C:\Users\MICRO\source\repos\coreTest2Api\coreTest2Api\obj\Debug\netcoreapp3.1\coreTest2Api.pdb
 C:\Users\MICRO\source\repos\coreTest2Api\coreTest2Api\obj\Debug\netcoreapp3.1\coreTest2Api.genruntimeconfig.cache
-C:\Users\MICRO\source\repos\coreTest2Api\coreTest2Api\obj\Debug\netcoreapp3.1\coreTest2Api.csprojAssemblyReference.cache
